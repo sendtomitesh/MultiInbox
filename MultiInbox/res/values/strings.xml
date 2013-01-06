@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MultiInbox</string>
+    <string name="yourCred">Supply your credentials</string>
+    <string name="menu_settings">Settings</string>
+    <string name="inbox">Inbox</string>
+    <string name="compose">Compose</string>
+    <string name="back">Back</string>
+    <string name="sender_email">Sender Email</string>
+    <string name="message_body">Message Body</string>
+    <string name="subject">Subject</string>
+    <string name="gmail">Gmail</string>
+    <string name="hotmail">Hotmail</string>
+    <string name="send_mail">Send Mail</string>
+    <string name="your_mail">Your Mail</string>
+    <string name="password">Password</string>
+    
+    <string name="loading_messages">Loading Messages&#8230;</string>
+    <string name="checking_login">Checking Login&#8230;</string>
+    
+	<string name="twitter_login">Twitter Login</string>
+    <string name="recent_tweets">Recent Tweets</string>
+    <string name="loading_tweets">Loading tweets&#8230;</string>
+    <string name="post_tweets">Post tweets</string>
+    <string name="post">Post</string>
+    <string name="logout">Logout</string>
+</resources>

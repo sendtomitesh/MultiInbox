@@ -1,0 +1,72 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff" >
+
+    <TextView
+        android:id="@+id/text_tweets"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@drawable/header"
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:text="@string/recent_tweets" />
+    
+    <TextView
+        android:id="@+id/text_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textSize="18sp"
+        android:textColor="#009AD4"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        android:text="@string/loading_tweets" />
+        
+    <ListView
+		    android:id="@+id/listview_tweets"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:layout_alignParentLeft="true"
+		    android:layout_alignParentTop="true"
+		    android:divider="#DDDDDD"
+		    android:layout_marginTop="35dp"
+		    android:dividerHeight="1dp"
+		    android:layout_marginBottom="50dp"
+		    tools:listitem="@layout/tweet_item" >
+		    
+		</ListView>
+		
+    <RelativeLayout 
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="#000000">
+
+        <EditText
+            android:id="@+id/text_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/btn_post"
+            android:hint="@string/post_tweets"
+            android:textColor="#BEBEBE"
+            android:ems="10" />
+
+        <Button
+            android:id="@+id/btn_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:onClick="postTweets"
+            android:text="@string/post" />
+        
+    </RelativeLayout>
+
+</RelativeLayout>
