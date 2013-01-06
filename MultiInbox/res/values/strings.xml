@@ -10,8 +10,9 @@
     <string name="sender_email">Sender Email</string>
     <string name="message_body">Message Body</string>
     <string name="subject">Subject</string>
-    <string name="gmail">Gmail</string>
+    <string name="gmail">Existing Gmail</string>
     <string name="hotmail">Hotmail</string>
+     <string name="fb">Facebook</string>
     <string name="send_mail">Send Mail</string>
     <string name="your_mail">Your Mail</string>
     <string name="password">Password</string>

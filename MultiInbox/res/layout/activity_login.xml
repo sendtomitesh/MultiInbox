@@ -40,4 +40,14 @@
         android:onClick="GmailLoginClick"
         android:text="@string/gmail" />
 
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_loading"
+        android:layout_below="@+id/btn_twitter_login"
+        android:layout_marginTop="46dp"
+        android:onClick="facebookLoginClick"
+        android:text="@string/fb" />
+
 </RelativeLayout>

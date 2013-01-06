@@ -14,6 +14,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -38,6 +40,31 @@ public class InboxActivity extends Activity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	// TODO Auto-generated method stub
+    	menu.add("Exit");
+    	menu.add("Contacts");
+    	menu.add("Add Account");
+    	return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	// TODO Auto-generated method stub
+    	if(item.toString().equals("Exit"))
+    	{
+    		Toast.makeText(getApplicationContext(), "Exit", Toast.LENGTH_LONG).show();
+    	}
+    	else if(item.toString().equals("Contacts"))
+    	{
+    		Toast.makeText(getApplicationContext(), "Contacts", Toast.LENGTH_LONG).show();
+    	}
+    	else if(item.toString().equals("Add Account"))
+    	{
+    		Toast.makeText(getApplicationContext(), "Add Account", Toast.LENGTH_LONG).show();
+    	}
+    	return super.onOptionsItemSelected(item);
+    }
     public void gotoCompose(View v) {
         Intent intent = new Intent(InboxActivity.this, SendMailActivity.class);
         intent.putExtra("inboxLoaded", "Gmail");

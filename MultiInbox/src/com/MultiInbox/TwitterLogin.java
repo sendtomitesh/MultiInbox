@@ -2,7 +2,6 @@ package com.MultiInbox;
 
 
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -22,7 +21,7 @@ public class TwitterLogin extends Activity {
        
     }
     
-    @SuppressLint("SetJavaScriptEnabled")
+  
 	public void loadLogin(){
     	 WebView webView = (WebView) findViewById(R.id.twitterlogin);
          WebSettings webSettings = webView.getSettings();

@@ -3,6 +3,7 @@ package com.MultiInbox;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.regex.Pattern;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,12 +12,15 @@ import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.Configuration;
 import twitter4j.conf.ConfigurationBuilder;
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Patterns;
 
 public class Utility {
 
@@ -27,6 +31,18 @@ public class Utility {
                 .setOAuthConsumerSecret(Const.TWITTER_CONSUMER_SECRET)
                 .build();
         return new TwitterFactory(conf).getInstance();
+    }
+    public static String getGmailEmail(Context context)
+    {
+    	Pattern emailPattern = Patterns.EMAIL_ADDRESS; // API level 8+
+    	Account[] accounts = AccountManager.get(context).getAccounts();
+    	for (Account account : accounts) {
+    	    if (emailPattern.matcher(account.name).matches()) {
+    	        return account.name;
+    	        
+    	    }
+    	}
+    	return null;
     }
     
     public static Twitter getTwitterFeedsInstance(Context context){

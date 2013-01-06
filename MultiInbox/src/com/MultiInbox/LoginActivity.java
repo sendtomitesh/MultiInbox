@@ -83,8 +83,18 @@ public class LoginActivity extends Activity {
     {
     	
     	
+    	Toast.makeText(getApplicationContext(), Utility.getGmailEmail(getApplicationContext()), Toast.LENGTH_LONG).show();
     	LayoutInflater inflater = this.getLayoutInflater();
     	final View dialogView =inflater.inflate(R.layout.login_view, null);
+    	textEmail = (EditText)dialogView.findViewById(R.id.test_email);
+    	textPassword = (EditText)dialogView.findViewById(R.id.text_password);
+    	if(mailtype == CombineInbox.InboxType.GMAIL)
+    	{
+    		textEmail.setText(Utility.getGmailEmail(getApplicationContext()));
+    		textPassword.requestFocus();
+    	}
+        
+        
     	AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
         builder.setMessage("Login with "+mailtype.toString())
         		.setView(dialogView)
@@ -92,8 +102,7 @@ public class LoginActivity extends Activity {
                     public void onClick(DialogInterface dialog, int id) {
                         // FIRE ZE MISSILES!
                     	
-                    	textEmail = (EditText)dialogView.findViewById(R.id.test_email);
-                        textPassword = (EditText)dialogView.findViewById(R.id.text_password);
+                    	
                     	String email = textEmail.getText().toString();
                         String password = textPassword.getText().toString();
                         if(emailPassValidity(email, password));
@@ -138,9 +147,11 @@ public class LoginActivity extends Activity {
     }
     public void TweeterLoginClick(View v)
     {
-    	//Toast.makeText(getApplicationContext(), "its tweeter", Toast.LENGTH_LONG).show();
-    	//new TwitterLogins().execute();
     	loginTwitter();
+    }
+    public void facebookLoginClick(View v)
+    {
+    	Toast.makeText(getApplicationContext(), "facebook login clicked", Toast.LENGTH_LONG).show();
     }
     public void gmailLogin(String uname,String pass) {
     	
@@ -307,13 +318,30 @@ public class LoginActivity extends Activity {
     
     public void loginTwitter() {
 
-    	String authUrl="";
-    	authUrl=getauthURL();
-    	if(authUrl == null)return;
-        Intent intent = new Intent(LoginActivity.this,TwitterLogin.class);
-        intent.putExtra(Const.TWITTER_AUTH_URL,
-                    authUrl);
-        startActivityForResult(intent, 0);
+    	
+    	new AsyncTask<String, Integer, String>(){
+
+			@Override
+			protected String doInBackground(String... params) {
+				// TODO Auto-generated method stub
+				 return getauthURL();
+			}
+			protected void onPostExecute(String result) 
+			{
+				Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+				if(result != null)
+				{
+		        Intent intent = new Intent(LoginActivity.this,TwitterLogin.class);
+		        intent.putExtra(Const.TWITTER_AUTH_URL,
+		                    result);
+		        startActivityForResult(intent, 0);
+				} 
+				
+			};
+			}.execute();
+    	
+    	
+    	
         
     }
     
