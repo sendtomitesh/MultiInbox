@@ -46,7 +46,7 @@ public class InboxActivity extends Activity {
 
     private void loadInbox() {
         CombineInbox.initalizeList();
-     //   loadTwitter();
+        loadTwitter();
          loadGmail();
         //Toast.makeText(getApplicationContext(), "Size : " + CombineInbox.sCombineInboxList.size(),
           //      Toast.LENGTH_SHORT).show();
@@ -69,7 +69,7 @@ public class InboxActivity extends Activity {
         String accessTokenSecret = twitterPreferences
                 .getString(Const.TWITTER_PREF_KEY_ACCESS_TOKEN_SECRET, null);
 
-        if (!accessToken.equals(null) && !accessTokenSecret.equals(null)) {
+        if ( accessToken != null && accessTokenSecret != null) {
             new RecieveTweets().execute();
         }
     }

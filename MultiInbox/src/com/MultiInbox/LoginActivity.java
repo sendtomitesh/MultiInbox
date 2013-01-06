@@ -307,20 +307,32 @@ public class LoginActivity extends Activity {
     
     public void loginTwitter() {
 
-       
-        try {
-        	 mTwitter = Utility.getTwitterInstance();
-             mTwitter.setOAuthAccessToken(null);
-            mRequestToken = mTwitter.getOAuthRequestToken(Const.TWITTER_CALLBACK_URL);
-            Intent intent = new Intent(LoginActivity.this,TwitterLogin.class);
-            intent.putExtra(Const.TWITTER_AUTH_URL,
-                    mRequestToken.getAuthorizationURL());
-            startActivityForResult(intent, 0);
-        } catch (TwitterException e) {
-            e.printStackTrace();
-        }
+    	String authUrl="";
+    	authUrl=getauthURL();
+    	if(authUrl == null)return;
+        Intent intent = new Intent(LoginActivity.this,TwitterLogin.class);
+        intent.putExtra(Const.TWITTER_AUTH_URL,
+                    authUrl);
+        startActivityForResult(intent, 0);
+        
     }
-
+    
+private String getauthURL()
+{
+	try
+	{
+	mTwitter = Utility.getTwitterInstance();
+    mTwitter.setOAuthAccessToken(null);
+    mRequestToken = mTwitter.getOAuthRequestToken(Const.TWITTER_CALLBACK_URL);
+    return mRequestToken.getAuthorizationURL();
+	}
+	catch (TwitterException e) {
+    e.printStackTrace();
+	}
+	return null;
+    
+}
+    
    /* public class TwitterLogins extends AsyncTask<String, Integer, Void> {
         @Override
         protected Void doInBackground(String... args) {
