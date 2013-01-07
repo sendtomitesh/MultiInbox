@@ -9,9 +9,9 @@
         android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCOUNT_MANAGER"/>
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
-    
+    <uses-permission android:name="android.permission.ACCOUNT_MANAGER" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
     <application
         android:allowBackup="true"
@@ -19,23 +19,27 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.MultiInbox.LoginActivity"
+            android:name="com.MultiInbox.MultiLoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="myapp" android:host="oauth" />
+
+                <data
+                    android:host="oauth"
+                    android:scheme="myapp" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.MultiInbox.InboxActivity"
             android:label="@string/app_name" >
-
         </activity>
         <activity
             android:name="com.MultiInbox.LiveInboxActivity"
@@ -43,10 +47,22 @@
         <activity
             android:name="com.MultiInbox.SendMailActivity"
             android:label="@string/app_name" />
-        <activity android:name="com.MultiInbox.TwitterLogin"
-                  android:label="@string/app_name"/>
-        
-        <activity android:name="com.MultiInbox.TweetsActivity"/>
+        <activity
+            android:name="com.MultiInbox.TwitterLogin"
+            android:label="@string/app_name" />
+        <activity android:name="com.MultiInbox.TweetsActivity" />
+        <activity android:name="com.MultiInbox.ContactActivity" />
+        <activity android:name="com.facebook.LoginActivity" >
+        </activity>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/app_id" />
+
+        <activity
+            android:name="com.MultiInbox.FBLogin"
+            android:label="@string/title_activity_fblogin" >
+        </activity>
     </application>
 
 </manifest>

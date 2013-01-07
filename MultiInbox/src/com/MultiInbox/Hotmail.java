@@ -182,6 +182,46 @@ public class Hotmail extends javax.mail.Authenticator {
         return new PasswordAuthentication(_user, _pass);
     }
 
+    public static boolean doHotmailLogin(final String username,final String password){
+        Properties props = System.getProperties();
+        
+        props.setProperty("mail.pop3.ssl.enable", "true");
+        props.setProperty("mail.pop3s.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.setProperty("mail.pop3s.socketFactory.fallback", "false");
+        props.setProperty("mail.pop3s.port", "995");
+        props.setProperty("mail.pop3s.socketFactory.port", "995");
+        
+        Authenticator auth = new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username,password);
+            }
+            
+        };
+        
+        Session sessioned = Session.getDefaultInstance(props, auth);
+        
+        Store store;
+        try {
+            store = sessioned.getStore("pop3s");
+            store.connect("pop3.live.com",995,username,password);
+           
+            Folder inbox = store.getFolder("INBOX");
+            inbox.open(Folder.READ_WRITE);
+            if(inbox.exists()){
+                return true;
+            }
+            else{
+                return false;
+           }
+           
+           
+        } catch (NoSuchProviderException e) {
+            return false;
+        } catch (MessagingException e) {
+            return false;
+        }
+
+    }
     private Properties _setProperties() {
         Properties props = new Properties();
 

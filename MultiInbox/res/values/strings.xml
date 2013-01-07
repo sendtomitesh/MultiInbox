@@ -12,18 +12,22 @@
     <string name="subject">Subject</string>
     <string name="gmail">Existing Gmail</string>
     <string name="hotmail">Hotmail</string>
-     <string name="fb">Facebook</string>
+    <string name="fb">Facebook</string>
     <string name="send_mail">Send Mail</string>
     <string name="your_mail">Your Mail</string>
     <string name="password">Password</string>
-    
     <string name="loading_messages">Loading Messages&#8230;</string>
     <string name="checking_login">Checking Login&#8230;</string>
-    
-	<string name="twitter_login">Twitter Login</string>
+    <string name="loading_contacts">Loading contacts&#8230;</string>
+    <string name="contacts">Contacts</string>
+    <string name="twitter_login">Twitter Login</string>
     <string name="recent_tweets">Recent Tweets</string>
     <string name="loading_tweets">Loading tweets&#8230;</string>
     <string name="post_tweets">Post tweets</string>
     <string name="post">Post</string>
     <string name="logout">Logout</string>
+    <string name="app_id">453630638019624</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_fblogin">FBLogin</string>
+
 </resources>

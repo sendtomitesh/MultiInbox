@@ -3,6 +3,7 @@ package com.MultiInbox;
 
 import java.util.Date;
 import java.util.Properties;
+
 import javax.activation.CommandMap;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -179,6 +180,44 @@ public class Gmail extends javax.mail.Authenticator {
         return new PasswordAuthentication(_user, _pass);
     }
 
+    
+    public static boolean doGmailLogin(final String username,final String password){
+        Properties props = System.getProperties();
+        props.put("mail.imap.host", "imap.gmail.com");
+        props.put("mail.imap.user", username);
+        // User SSL
+        props.put("mail.imap.socketFactory", 993);
+        props.put("mail.imap.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.imap.port", 993);
+        Authenticator auth = new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username,password);
+            }
+            
+        };
+        Session sessioned = Session.getDefaultInstance(props, auth);
+
+        Store store;
+        try {
+            store = sessioned.getStore("imaps");
+            store.connect("smtp.gmail.com", username, password);
+
+            Folder inbox = store.getFolder("inbox");
+
+            inbox.open(Folder.READ_WRITE);
+            if (inbox.exists()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (NoSuchProviderException e) {
+            return false;
+        } catch (MessagingException e) {
+            return false;
+        }
+
+    }
     private Properties _setProperties() {
         Properties props = new Properties();
 

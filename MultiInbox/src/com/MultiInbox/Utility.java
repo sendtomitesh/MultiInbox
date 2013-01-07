@@ -3,6 +3,8 @@ package com.MultiInbox;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.json.JSONException;
@@ -74,6 +76,16 @@ public class Utility {
         editor.remove(Const.TWITTER_PREF_KEY_ACCESS_TOKEN);
         editor.remove(Const.TWITTER_PREF_KEY_ACCESS_TOKEN_SECRET);
         editor.commit();
+    }
+    public static void logoutAllAccount(Context context){
+        SharedPreferences twitterPreference =context.getSharedPreferences(Const.TWITTER_PREF_NAME,0);
+        SharedPreferences gmailPreference =context.getSharedPreferences(Const.GMAIL_PREF_NAME,0);
+        SharedPreferences hotmailPreference =context.getSharedPreferences(Const.HOTMAIL_PREF_NAME,0);
+        removeGmailPrefrences(gmailPreference);
+        removeHotmailPrefrences(hotmailPreference);
+        removeTwitterPrefrences(twitterPreference);
+        com.facebook.Session s= com.facebook.Session.getActiveSession();
+    	if(s.isOpened())s.closeAndClearTokenInformation();
     }
 
 	public final static boolean isValidEmail(CharSequence target) {
@@ -186,5 +198,64 @@ public class Utility {
 		return jArray;
 
 	}
-
+	
+	public static boolean isTwitterConnected(Context context){
+	    SharedPreferences twitterPreference =context.getSharedPreferences(Const.TWITTER_PREF_NAME,0);
+	    return twitterPreference.getString(Const.TWITTER_PREF_KEY_ACCESS_TOKEN,null) != null;
+	}
+	
+	public static boolean isGmailConnected(Context context){
+        SharedPreferences gmailPreference =context.getSharedPreferences(Const.GMAIL_PREF_NAME,0);
+        return gmailPreference.getString(Const.GMAIL_ID_KEY,null) != null;
+    }
+	
+	public static boolean isHotmailConnected(Context context){
+        SharedPreferences hotmailPreference =context.getSharedPreferences(Const.HOTMAIL_PREF_NAME,0);
+        return hotmailPreference.getString(Const.HOTMAIL_EMAIL_KEY,null) != null;
+    }
+	
+	public static boolean isFBConnected()
+	{
+		com.facebook.Session s = com.facebook.Session.getActiveSession();
+		return s.isOpened();
+	}
+	public static List<String> getLoginList(Context context){
+	    List<String> loginList = new ArrayList<String>();
+	    if(!isGmailConnected(context)){
+	        loginList.add("Existing Gmail");
+	    }
+	    else{
+	        loginList.remove("Existing Gmail");
+	    }
+	    
+	    
+	    if(!isHotmailConnected(context)){
+	        loginList.add("Hotmail Login");
+        }
+        else{
+            loginList.remove("Hotmail Login");
+        }
+	    
+	    if(!isTwitterConnected(context)){
+            loginList.add("Twitter Login");
+        }
+        else{
+            loginList.remove("Twitter Login");
+        }
+	    
+	    if(!isFBConnected())
+	    {
+	    	loginList.add("FB Login");
+	    }
+	    else
+	    {
+	    	loginList.remove("FB Login");
+	    }
+	    
+	    if(loginList.size() == 0){
+            loginList.add("Already Logged in");
+        }
+	    return loginList;
+	    
+	}
 }

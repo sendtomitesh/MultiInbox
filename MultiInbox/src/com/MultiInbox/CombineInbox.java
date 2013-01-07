@@ -8,6 +8,12 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+
+
 import android.util.Log;
 
 public class CombineInbox {
@@ -149,6 +155,32 @@ public class CombineInbox {
         else{
             return false;
         }
+    }
+    
+    public static boolean setFBInbox(String json)
+    {
+    	
+		String feed;
+		try {
+            
+
+            JSONArray jsonNArray = new JSONArray(json);
+            for (int i = 0; i < jsonNArray.length(); i++) {
+
+                JSONObject jsonObject = jsonNArray.getJSONObject(i);
+                feed=jsonObject.getString("description");
+                CombineInbox inbox = new CombineInbox(feed, "",InboxType.FB);
+                sCombineInboxList.add(inbox);
+               // Toast.makeText(getApplicationContext(), jsonObject.getString("description"), Toast.LENGTH_LONG).show();
+            }
+            return true;
+        }
+        catch(JSONException e)
+        {
+       	 e.printStackTrace();
+       	 return false;
+        }
+		
     }
 
 }
